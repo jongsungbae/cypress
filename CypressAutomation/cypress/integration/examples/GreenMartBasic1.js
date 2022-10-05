@@ -3,8 +3,20 @@
 describe('My First Suite', () => {
     it('My first Testcase', () => {
         cy.visit("https://rahulshettyacademy.com/seleniumPractise/#/")
-        cy.get('.search-keyword').type('ca')
-        cy.wait(2000)
+
+        // assert if logo text is correctly displayed
+        cy.get('.brand').should('have.text', 'GREENKART')
+
+        // this is to print in logs
+        cy.get('.brand').then((logoelement) => {
+            cy.log(logoelement.text())
+        })
+
+        // type 'ca' on the searchbox
+        cy.get('.search-keyword').as('searchBox')
+        cy.get('@searchBox').should('be.enabled')
+        cy.get('@searchBox').type('ca')
+        cy.wait(1000)
 
         // check the number of the item
         cy.get('.product:visible').should('have.length', 4)
@@ -22,13 +34,12 @@ describe('My First Suite', () => {
             }
         }) 
 
-        // assert if logo text is correctly displayed
-        cy.get('.brand').should('have.text', 'GREENKART')
-
-        // this is to print in logs
-        cy.get('.brand').then((logoelement) => {
-            cy.log(logoelement.text())
-        })
+        // click the go to cart icon
+        cy.get('.cart-icon > img').click()
+        cy.contains('PROCEED TO CHECKOUT').click()
+        
+        // click the place order button
+        cy.contains('Place Order').click()
     })
     
   })
