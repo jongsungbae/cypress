@@ -43,5 +43,19 @@ describe('My Basic Test Suite', () => {
         cy.get('#show-textbox').click()
         cy.get('#displayed-text').should('be.visible')
     })
+
+    it('pop-up example',()=>{
+        // alert pop-up
+        cy.get('#alertbtn').click()
+        cy.on('window:alert',(str)=>{
+            expect(str).to.equal('Hello , share this practice page and share your knowledge')
+        })
+
+        // confirm alert
+        cy.get('#confirmbtn').click()
+        cy.on('window:confirm',(str)=>{
+            expect(str).to.equal('Hello , Are you sure you want to confirm?')
+        })
+    })
     
   })
