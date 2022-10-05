@@ -20,7 +20,7 @@ describe('My First Suite', () => {
 
         // check the number of the item
         cy.get('.product:visible').should('have.length', 4)
-        // parent child
+        // using parent child
         cy.get('.products').as('productLocator')
         cy.get('@productLocator').find('.product').should('have.length', 4)
 
