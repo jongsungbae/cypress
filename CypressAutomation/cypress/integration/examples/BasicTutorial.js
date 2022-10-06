@@ -67,11 +67,26 @@ describe('My Basic Test Suite', () => {
         cy.go('back')
         cy.url().should('include', 'AutomationPractice')
 
-
         // navigate forward
         //cy.go('forward')
+    })
 
+    it('table check',()=>{
+        cy.get('table[name="courses"] tr td:nth-child(2)').each(($el, index, $list)=> {
+            const text = $el.text()
+            if(text.includes('Python')){
+                cy.get('table[name="courses"] tr td:nth-child(2)').eq(index).next().then((price)=>{
+                    const priceText = price.text()
+                    expect(priceText).to.equal('25')
+                })
+            }
+        })
+    })
 
+    it('mouse hover',()=>{
+        cy.get('.mouse-hover-content').invoke('show')
+        cy.contains('Top').click()
+        cy.url().should('include', 'top')
     })
     
   })
