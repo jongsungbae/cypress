@@ -84,8 +84,9 @@ describe('My Basic Test Suite', () => {
     })
 
     it('mouse hover',()=>{
-        cy.get('.mouse-hover-content').invoke('show')
-        cy.contains('Top').click()
+        // cy.get('.mouse-hover-content').invoke('show')
+        // cy.contains('Top').click()
+        cy.contains('Top').click({force:true})
         cy.url().should('include', 'top')
     })
     
