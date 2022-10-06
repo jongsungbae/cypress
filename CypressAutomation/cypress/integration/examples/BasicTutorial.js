@@ -57,5 +57,21 @@ describe('My Basic Test Suite', () => {
             expect(str).to.equal('Hello , Are you sure you want to confirm?')
         })
     })
+
+    it('child tap control',()=>{
+        //remove blank attribute
+        cy.get('#opentab').invoke('removeAttr', 'target').click()
+        // check title
+        cy.title().should('eq', 'Rahul Shetty Academy')
+        // navigate back
+        cy.go('back')
+        cy.url().should('include', 'AutomationPractice')
+
+
+        // navigate forward
+        //cy.go('forward')
+
+
+    })
     
   })
